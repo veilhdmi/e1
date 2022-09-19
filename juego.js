@@ -9,7 +9,8 @@ const crearBoard=(numRows, numCols)=>{
                 casillas.push({
                     mostrar : false,
                     clickDisabled : false,
-                    jugador: true
+                    jugador: true,
+                    valor: true
                 })
             }
     
@@ -21,11 +22,9 @@ const crearBoard=(numRows, numCols)=>{
 const enviarBoard=()=>{
         for (let i = 0; i < board.length; i++) {
             const casillas = board[i]
-            for (let j=0; j < casillas.length; j++) {
-                const butCasilla = document.getElementById(`${i}_${j}`)
-                if (casilla[j]) {
-                    
-                }
+            if (casillas.valor == true) {
+                console.log("Gana X")
+                casillas.clickDisabled = true
             }
         }
 }    
@@ -37,20 +36,21 @@ const getValue = (board, row, col) => {
 const casillaClick=(r,c)=>{
     contadorGlobal+=1
     const casilla = getValue(board, r, c)
-    //casilla.mostrar =true
     const cas = document.getElementById(`${r}_${c}`)
-    //cas.innerHTML = "X"
+    if (casilla.clickDisabled == false) {
         if (contadorGlobal == 1 || 
             contadorGlobal == 3|| 
             contadorGlobal == 5|| 
             contadorGlobal == 7|| 
             contadorGlobal == 9) {
             cas.innerHTML = "X"
+            
         }else {
             cas.innerHTML = "O"
+            casilla.valor = false
         }
-        
-        
+    }
+           
     
     //enviarBoard(board)
     
